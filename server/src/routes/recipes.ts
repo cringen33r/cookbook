@@ -81,9 +81,8 @@ router.put('/:id', async (req, res) => {
     const oldRecipe = db.recipes[index];
     const newImageUrl = req.body.imageUrl;
     
-    // Удаляем старое изображение, если оно изменилось
     if (oldRecipe.imageUrl && oldRecipe.imageUrl !== newImageUrl) {
-      const oldImagePath = path.join(__dirname, '../uploads', path.basename(oldRecipe.imageUrl));
+      const oldImagePath = path.join(__dirname, '../..', 'uploads', path.basename(oldRecipe.imageUrl));
       try {
         await fs.unlink(oldImagePath);
       } catch (err) {
@@ -115,7 +114,7 @@ router.delete('/:id', async (req, res) => {
     if (!recipe) return res.status(404).json({ message: 'Recipe not found' });
 
     if (recipe.imageUrl) {
-      const imagePath = path.join(__dirname, '../uploads', path.basename(recipe.imageUrl));
+      const imagePath = path.join(__dirname, '../..', 'uploads', path.basename(recipe.imageUrl));
       try {
         await fs.unlink(imagePath);
       } catch (err) {
