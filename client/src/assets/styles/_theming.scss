@@ -1,0 +1,63 @@
+@use '@angular/material' as mat;
+@include mat.core;
+
+$my-primary: mat.define-palette(mat.$green-palette, 500);
+$my-accent: mat.define-palette(mat.$orange-palette, A200, A100, A400);
+$my-warn: mat.define-palette(mat.$red-palette);
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($my-theme);
+
+$red: #da3232;
+$green: #268b2b;
+$light: #eaeaea;
+$dark: #353535;
+$light-grey: #858585;
+
+// I use these at-rules as wrappers for theming for smooth color-change (this way 'transition' can be applied for these variables)
+// upd. no color-change today(
+@property --dominant-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #eaeaea;
+}
+
+@property --opposite-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #353535;
+}
+
+@property --highlight-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #fff;
+}
+
+@property --strong-text-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #353535;
+}
+
+@property --weak-text-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #858585;
+}
+
+@property --theme-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #268b2b;
+}

@@ -1,0 +1,68 @@
+{
+  "editor.lineNumbers": "on",
+  "editor.trimAutoWhitespace": true,
+  "editor.tabSize": 2,
+
+  // Основные настройки форматирования
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // Настройки для TypeScript
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+      "source.fixAll.eslint": "always"
+    }
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // Настройки для HTML
+  "[html]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    }
+  },
+
+  // Stylelint настройки
+  "stylelint.validate": ["css", "scss", "sass", "less"],
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "always"
+    }
+  },
+
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "always"
+    }
+  },
+
+  "[sass]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "always"
+    }
+  },
+
+  "[less]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "always"
+    }
+  },
+
+  // Общие действия при сохранении
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  },
+
+  // Отключение встроенной валидации
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false
+}

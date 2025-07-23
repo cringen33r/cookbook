@@ -1,0 +1,52 @@
+<mat-card [class]="mode">
+  <div class="actions">
+    <button class="action edit" mat-mini-fab color="primary" (click)="onEdit()" tooltip="matTooltip"
+          matTooltip="Edit recipe"
+          [matTooltipPosition]="'below'">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button class="action" mat-mini-fab color="primary" [routerLink]="['/main']" #tooltip="matTooltip"
+          matTooltip="Return to main"
+          [matTooltipPosition]="'below'" *ngIf="mode === 'full'">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+
+  <div
+    [class]="mode"
+    class="product-image"
+    (click)="onClick()"
+    (keyup.enter)="onClick()"
+    [attr.tabindex]="mode === 'preview' ? 0 : -1">
+    <img [src]="'http://localhost:3000' + recipe.imageUrl" alt="product-image" />
+  </div>
+
+  <div class="header">
+    <h3>{{ recipe.title }}</h3>  </div>
+
+  <span class="desc">{{ recipe.description }}</span>
+
+  <div class="detailed-desc" *ngIf="mode === 'full'">
+    <div class="ingredients">
+      <h4>Ингредиенты:</h4>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient.product }} - {{ ingredient.amount }} {{ ingredient.unit }}
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="instructions"
+      *ngIf="recipe.instructions?.length">
+      <h4>Инструкции:</h4>
+      <ol>
+        <li *ngFor="let instruction of recipe.instructions">{{ instruction }}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="meta">
+    <p class="updated">{{ recipe.updatedAt | date: 'dd.MM.YYYY' }}</p>
+  </div>
+</mat-card>

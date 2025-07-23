@@ -1,0 +1,19 @@
+<div class="info">
+  <div *ngIf="!hasLoaded && !error">
+    <mat-progress-spinner
+        [color]="'primary'"
+        [mode]="'indeterminate'">
+    </mat-progress-spinner>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+</div>
+<div class="card-wrapper">
+  <cb-recipe-card 
+    *ngIf="recipe && hasLoaded"
+    [recipe]="recipe"
+    [mode]="'full'">
+  </cb-recipe-card>
+</div>

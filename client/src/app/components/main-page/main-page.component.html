@@ -1,0 +1,32 @@
+<!-- loading stage -->
+<div class="info">
+  <div *ngIf="!hasLoaded && !error">
+    <mat-progress-spinner
+        [color]="'primary'"
+        [mode]="'indeterminate'">
+    </mat-progress-spinner>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+</div>
+<!-- search section -->
+<div class="controls">
+  <cb-searcher (searchChanged)="searchRecipes($event)"></cb-searcher>
+  <button mat-fab color="primary" [routerLink]="['/creator']"><mat-icon>add</mat-icon></button>
+</div>
+
+<!-- the content itself -->
+<div class="recipes-wrapper">
+  <div class="recipes" [class.empty]="recipes.length === 0" *ngIf="hasLoaded && !error">
+    <cb-recipe-card 
+      *ngFor="let recipe of recipes.slice().reverse()"
+      [recipe]="recipe"
+      [mode]="'preview'">
+    </cb-recipe-card>
+    <div *ngIf="recipes.length === 0">
+      Рецепты не найдены.
+    </div>
+  </div>
+</div>

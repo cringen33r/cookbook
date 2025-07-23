@@ -1,0 +1,89 @@
+<div class="info">
+  <div *ngIf="!hasLoaded && !error">
+    <mat-progress-spinner
+        [color]="'primary'"
+        [mode]="'indeterminate'">
+    </mat-progress-spinner>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+</div>
+<div class="creator-wrapper">
+    <mat-card class="creator-container" *ngIf="hasLoaded && !error">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+        <!-- title -->
+        <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Название</mat-label>
+        <input matInput formControlName="title" maxlength="40" minlength="2" required />
+        <mat-error *ngIf="recipeForm.get('title')?.invalid">
+            Введите название
+        </mat-error>
+        </mat-form-field>
+
+        <!-- image -->
+        <cb-image-upload [imagePreview]="imagePreview" (fileChange)="onImageFileChange($event)"></cb-image-upload>
+
+        <!-- desc -->
+        <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Описание</mat-label>
+        <textarea matInput formControlName="description" rows="3" maxlength="300"></textarea>
+        </mat-form-field>
+
+        <!-- ingredients -->
+        <div formArrayName="ingredients" class="ingredients-section">
+        <h3>Ингредиенты</h3>
+        <cb-ingredient-row
+            *ngFor="let ingredient of ingredients.controls; let i = index"
+            [ingredient]="ingredient"
+            [index]="i"
+            (remove)="removeIngredient(i)">
+        </cb-ingredient-row>
+
+        <button
+            mat-button
+            type="button"
+            color="primary"
+            (click)="addIngredient()">
+            <mat-icon>add</mat-icon>
+            Добавить ингредиент
+        </button>
+        </div>
+
+        <!-- instructions -->
+        <div formArrayName="instructions" class="instructions-section">
+        <h3>Инструкции</h3>
+        <cb-instruction-row
+            *ngFor="let instruction of instructions.controls; let i = index"
+            [instruction]="instruction"
+            [index]="i"
+            [canRemove]="instructions.length > 1"
+            (remove)="removeInstruction(i)">
+        </cb-instruction-row>
+
+        <button
+            mat-button
+            type="button"
+            color="primary"
+            (click)="addInstruction()">
+            <mat-icon>add</mat-icon>
+            Добавить шаг
+        </button>
+        </div>
+
+        <!-- actions -->
+        <div class="form-actions">
+        <button mat-button type="button" (click)="onCancel()">Отмена</button>
+        <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="recipeForm.invalid || (isEditMode && !hasChanges())">
+            {{ isEditMode ? 'Обновить' : 'Создать' }} 
+        </button>
+        <button mat-raised-button *ngIf="isEditMode" type="button" color="warn" (click)="onDelete()">Удалить</button>
+        </div>
+    </form></mat-card
+    >
+</div>

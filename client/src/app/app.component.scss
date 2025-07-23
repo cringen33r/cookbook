@@ -1,0 +1,27 @@
+@use 'vars' as *;
+
+nav {
+  position: fixed;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  height: $nav-height;
+  padding: 5px 20px;
+
+  background-color: var(--highlight-color);
+
+  box-shadow: 0 0 10px -5px #000;
+
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: block;
+    width: 300px;
+    height: 100%;
+  }
+}

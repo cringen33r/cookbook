@@ -1,0 +1,144 @@
+@use 'theming' as *;
+
+// -------MEDIA------- //
+
+// -------MEDIA------- //
+
+// -------CUSTOMIZATION------- //
+
+$actions-margin: 1%;
+$actions-scale: 0.8;
+$header-gap: 5px;
+$header-height: 50px;
+$content-margin: 10px;
+$content-gap: 5px;
+$tag-padding: 2px 5px;
+$tag-font-size: 0.75rem;
+$border-radius: 16px;
+$meta-gap: 10px;
+$border-width: 2.5px;
+$avatar-size: 40px;
+$meta-text-size: 0.75rem;
+$author-text-size: 0.85rem;
+
+// -------CUSTOMIZATION------- //
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+mat-card {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &.preview {
+    display: grid;
+    grid-template:
+      'image' 50%
+      'header' min-content
+      'desc' 1fr
+      'meta' auto / 1fr;
+    height: 100%;
+  }
+
+  &.full {
+    display: flex;
+    height: min-content;
+  }
+}
+
+.actions {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  display: grid;
+  grid-auto-flow: column;
+  margin: $actions-margin;
+
+  * {
+    transform: scale($actions-scale);
+  }
+}
+
+.product-image {
+  grid-area: image;
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+
+  &.preview {
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.header {
+  display: grid;
+  grid-area: header;
+  gap: $header-gap;
+  margin: $content-gap $content-margin;
+
+  .tags-container {
+    display: grid;
+    grid-auto-flow: column;
+    gap: $header-gap;
+    overflow: hidden;
+
+    cursor: grab;
+    user-select: none;
+  }
+
+  // TO CHANGE
+  .tag {
+    display: inline-grid;
+    place-items: center;
+    padding: $tag-padding;
+    font-size: $tag-font-size;
+    color: var(--weak-text-color);
+    white-space: nowrap;
+    background-color: var(--dominant-color);
+    border-radius: $border-radius;
+  }
+}
+
+.desc {
+  grid-area: desc;
+  height: min-content;
+  margin: 0 $content-margin;
+  overflow: hidden;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: justify;
+  color: var(--weak-text-color);
+}
+
+.detailed-desc {
+  margin: $content-gap $content-margin;
+  gap: $content-gap;
+}
+.meta {
+  display: grid;
+  grid-area: meta;
+  grid-template-columns: auto 1fr;
+  gap: $meta-gap;
+  align-items: center;
+  padding: $content-gap $content-margin;
+  border-top: var(--dominant-color) solid $border-width;
+
+  .author-avatar {
+    width: $avatar-size;
+    height: $avatar-size;
+    border-radius: 50%;
+  }
+  .updated {
+    font-size: $meta-text-size;
+    color: var(--weak-text-color);
+  }
+}
